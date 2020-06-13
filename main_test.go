@@ -73,13 +73,13 @@ func TestGetCompanyBefore(t *testing.T) {
 	   "name": "tola sales group",
 	   "zip": "78229",
 	   "website": "",
-   }
+   	}
 
-   payload := strings.NewReader("")
-   request, _ := http.NewRequest("GET", "/company/tola",payload)
-   response := httptest.NewRecorder()
-   Router().ServeHTTP(response, request)
-   assert.Equal(t, 200, response.Code, "OK response is expected")
+	payload := strings.NewReader("")
+	request, _ := http.NewRequest("GET", "/company/tola",payload)
+	response := httptest.NewRecorder()
+	Router().ServeHTTP(response, request)
+	assert.Equal(t, 200, response.Code, "OK response is expected")
 
 	var responseJson map[string]string
 	err := json.Unmarshal([]byte(response.Body.String()), &responseJson)
@@ -129,7 +129,7 @@ func TestUpdateCompany(t *testing.T) {
 func TestGetCompanyAfter(t *testing.T) {
 
 	 // Build our expected body
-	 body := gin.H{
+	body := gin.H{
 		"name": "tola sales group",
 		"zip": "78229",
 		"website": "http://repsources.com",
@@ -141,17 +141,17 @@ func TestGetCompanyAfter(t *testing.T) {
     Router().ServeHTTP(response, request)
 	assert.Equal(t, 200, response.Code, "OK response is expected")
 
-	 var responseJson map[string]string
-	 err := json.Unmarshal([]byte(response.Body.String()), &responseJson)
-	 assert.Nil(t, err)
+	var responseJson map[string]string
+	err := json.Unmarshal([]byte(response.Body.String()), &responseJson)
+	assert.Nil(t, err)
 
-	 valueName, exists1 := responseJson["name"]
-	 assert.True(t, exists1)
-	 assert.Equal(t, body["name"], valueName)
-	 valueZip, exists2 := responseJson["zip"]
-	 assert.True(t, exists2)
-	 assert.Equal(t, body["zip"], valueZip)
-	 valueWebsite, exists3 := responseJson["website"]
-	 assert.True(t, exists3)
-	 assert.Equal(t, body["website"], valueWebsite)
+	valueName, exists1 := responseJson["name"]
+	assert.True(t, exists1)
+	assert.Equal(t, body["name"], valueName)
+	valueZip, exists2 := responseJson["zip"]
+	assert.True(t, exists2)
+	assert.Equal(t, body["zip"], valueZip)
+	valueWebsite, exists3 := responseJson["website"]
+	assert.True(t, exists3)
+	assert.Equal(t, body["website"], valueWebsite)
 }
